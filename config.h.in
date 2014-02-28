@@ -42,7 +42,7 @@
 #undef HAVE_STRSTR
 
 /* Define if you have the syslog function.  */
-#undef HAVE_SYSLOG
+#define  HAVE_SYSLOG 1
 
 /* Define if you have the <dirent.h> header file.  */
 #undef HAVE_DIRENT_H
@@ -375,7 +375,7 @@
 /*
  * Enable if you want use syslog for log messages
  */
-#undef USE_SYSLOG
+#undef  USE_SYSLOG
 
 /*
  * Enable old style tosting
