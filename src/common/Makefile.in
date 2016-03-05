@@ -97,7 +97,9 @@ build_triplet = @build@
 host_triplet = @host@
 subdir = src/common
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/iconv.m4 \
+	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
+	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -190,7 +192,7 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libfidogate_la_LIBADD =
+libfidogate_la_DEPENDENCIES =
 am__objects_2 = libfidogate_la-acl.lo libfidogate_la-acl_ftn.lo \
 	libfidogate_la-active.lo libfidogate_la-address.lo \
 	libfidogate_la-aliases.lo libfidogate_la-areas.lo \
@@ -345,6 +347,7 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LHA = @LHA@
+LIBICONV = @LIBICONV@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -352,6 +355,7 @@ LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LN_S = @LN_S@
 LOCKDIR = @LOCKDIR@
 LOGDIR = @LOGDIR@
+LTLIBICONV = @LTLIBICONV@
 LTLIBOBJS = @LTLIBOBJS@
 M4MAKE = @M4MAKE@
 MAINT = @MAINT@
@@ -469,6 +473,7 @@ AUTOMAKE_OPTIONS = foreign
 @enable_static_FALSE@libfidogate_la_CFLAGS = -Wall -g -fPIC
 libfidogate_la_SOURCES = $(SRC)
 libfidogate_la_LDFLAGS = -shared -rpath $(libdir) -soname $(libdir) -version-info 5:0:0
+libfidogate_la_LIBADD = @LIBICONV@
 AM_CPPFLAGS = -I$(top_srcdir)/src/include
 SRC = acl.c \
 	    acl_ftn.c \

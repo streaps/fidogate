@@ -96,7 +96,9 @@ build_triplet = @build@
 host_triplet = @host@
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/iconv.m4 \
+	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
+	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -168,12 +170,14 @@ DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(top_srcdir)/build/compile $(top_srcdir)/build/config.guess \
 	$(top_srcdir)/build/config.make.in \
+	$(top_srcdir)/build/config.rpath \
 	$(top_srcdir)/build/config.sub $(top_srcdir)/build/install-sh \
 	$(top_srcdir)/build/ltmain.sh $(top_srcdir)/build/missing \
-	$(top_srcdir)/build/mkinstalldirs COPYING ChangeLog TODO \
-	acconfig.h build/compile build/config.guess build/config.sub \
-	build/depcomp build/install-sh build/ltconfig build/ltmain.sh \
-	build/missing build/mkinstalldirs build/ylwrap
+	$(top_srcdir)/build/mkinstalldirs ABOUT-NLS COPYING ChangeLog \
+	TODO acconfig.h build/compile build/config.guess \
+	build/config.rpath build/config.sub build/depcomp \
+	build/install-sh build/ltconfig build/ltmain.sh build/missing \
+	build/mkinstalldirs build/ylwrap
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -257,6 +261,7 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LHA = @LHA@
+LIBICONV = @LIBICONV@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -264,6 +269,7 @@ LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LN_S = @LN_S@
 LOCKDIR = @LOCKDIR@
 LOGDIR = @LOGDIR@
+LTLIBICONV = @LTLIBICONV@
 LTLIBOBJS = @LTLIBOBJS@
 M4MAKE = @M4MAKE@
 MAINT = @MAINT@
@@ -404,6 +410,8 @@ FDESTDIR = $(DEFAULT_V_CONFIGDIR) \
 		  $(DEFAULT_V_PINBOUND)/bad \
 		  $(DEFAULT_V_PINBOUND)/tmpunpack
 
+ACLOCAL_AMFLAGS = -I m4
+EXTRA_DIST = build/config.rpath m4/ChangeLog
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
